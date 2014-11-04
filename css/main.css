@@ -1,0 +1,336 @@
+html, body {
+	background:#eee;
+}
+.introduction-container {
+	border:solid 1px #777;
+	max-width: 62.5em;
+	margin:20px auto 20px auto;
+	background:white;
+}
+.row .columns {
+
+	/*border:dashed 1px #eee;*/
+	min-height: 30px;
+	font-family: 'Raleway', Arial, serif; 
+	font-weight: 300;
+	font-size: 20px;
+	color:#555;
+	display: table-row;
+}
+.header {
+	padding: 30px 0px 30px 0px;
+	border-bottom:solid 1px #777;
+	background:#ccc;
+}
+.your-logo {
+
+	text-align: center;
+	border:solid 1px #777;
+	height: 120px;
+	display: table-cell;
+	vertical-align: middle;
+	width:120px;
+	color:#777;
+	min-width: 100px;
+	background:#fff;
+}
+.company-themed-header {
+
+	height: 100px;
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 45px;
+	color:#666;
+	font-weight: bold;
+}
+.step-number {
+	background:#ccc;
+	color:#fff;
+	height:30px;
+	width:30px;
+	display:inline-block;
+	border-radius:15px;
+	padding-left:9px;
+	line-height: 25px;
+}
+.step-2 {
+
+	padding-left:7px;
+}
+.sign-up-text {
+	display:inline-block;
+	position:absolute;
+	top:21px;
+	left:40px;
+}
+.sign-up {
+	height: 80px;
+	display: table-cell;
+	vertical-align: middle;
+	font-family: 'Raleway', Arial, serif; 
+	font-size: 30px;
+	color:#777;
+	font-weight: normal;
+	position:relative;
+	min-width:250px;
+}
+.step-row {
+	border-bottom:solid 1px #666;
+}
+.basic-questions {
+	border-bottom:solid 1px #666;
+	padding-top: 25px;
+}
+.options {
+	height: 60px;
+	display: table-cell;
+	vertical-align: middle;
+	font-family: 'Raleway', Arial, serif; 
+	font-size: 25px;
+	color:#777;
+	font-weight: normal;
+}
+.occupation, .income, .date-of-birth, .date-field {
+	height:90px;
+}
+.occupation input, .income input {
+	margin-top:13px;
+}
+.date-of-birth input {
+	width:30%;
+	display:inline-block;
+	margin:10px 0px 0px 5px;
+	max-width: 80px;
+}
+.standard-text input {
+	display:inline-block;
+	margin:10px 0px 0px 0px;
+	width:90%;
+}
+.select-list-basic select {
+
+	width:90%;
+	display:inline-block;
+	margin:10px 0px 0px 0px;
+	padding:6px;
+	border-color: rgb(204, 204, 204);
+	/*border-color: rgb(154, 154, 154);*/
+}
+
+.select-list-basic select:focus {
+
+}
+.large-option-box {
+	border:solid 1px #777;
+	min-height: 400px;
+	margin-bottom: 30px;
+	text-align: center;
+	color:#555;
+	-webkit-transition: all 0.3s linear;
+	cursor: pointer;
+}
+.option-name {
+	padding:15px 0px 15px 0px;
+	border-bottom: solid 1px #777;
+	font-weight: 500;
+}
+.option-description {
+	padding:8px 0px 8px 0px;
+	font-size: 18px;
+}
+.option-benefit {
+	padding:12px 0px 0px 0px;
+	font-size: 16px;
+	text-align: left;
+	text-indent: 40px;
+}
+.submit-container {
+	text-align: right;
+}
+.small-plan-view {
+	padding-top:15px;
+}
+.selected {
+	
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.6), 
+				-3px 3px 3px rgba(0,0,0,0.6); 
+}
+.bottom-row {
+	/*border-bottom: solid 1px #777;*/
+}
+.main-form-step {
+	margin-bottom: 10px;
+}
+.main-form-question {
+	padding-top: 6px;
+	overflow:hidden;
+	min-height: 0px;
+}
+.basic-input-area {
+	overflow:hidden;
+}
+.panel-manager {
+	overflow:hidden;
+}
+.slide {
+	width: 2400px;
+}
+.application-step {
+	float:left;
+}
+mainform {
+	display:none;
+}
+.main-form-question .inline-label {
+	display:inline-block;
+}
+.radio-row {
+	padding-top:5px;
+}
+.list-link {
+	font-weight:300;
+}
+.field-container, .field-container-no-border {
+	min-height:90px !important;
+}
+.form-group {
+	margin:20px 5px 0px;
+	position:relative;
+}
+.form-group:before {
+
+	content:" ";
+	display:block;
+	border: solid 1px;
+	border-color: #888 #666 #333 #666;
+	background: #eee;
+	height:102%;
+	width:100%;
+	margin:-10px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	/*box-shadow: 1px 1px 1px rgba( 1, 1, 1, 0.6 );*/
+}
+
+input:focus:before {
+
+	/*
+	content:" ";
+	display:block;
+	border: solid 1px;
+	border-color: #888 #666 #333 #666;
+	/*background: red; 
+	height:105%;
+	width:100%;
+	margin:-10px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	*/
+}
+.main-window {
+
+	overflow: hidden;
+
+}
+.button-bar {
+	padding-top:18px;
+}
+.buttons {
+	text-align: right;
+	padding-right: 35px;
+}
+.radio-option {
+	float:left;
+}
+
+.radio-option * {
+	display:inline-block;
+}
+.radio-option label {
+	width: 80%;
+	margin-left: 5px;
+}
+.radio-option input {
+	margin-top: 22px;
+}
+.OnlineBanking:before, .CreditCard:before {
+
+	height:155%;
+}
+.OnlineBanking input[type='text'], .CreditCard  input[type='text'] {
+	width:95%;
+}
+.field-header h3 {
+	font-family: 'Raleway', Arial, serif !important;
+	color:rgb(77, 77, 77) !important;
+}
+.clear {
+	clear:both;
+}
+.mega-option {
+
+	text-align: center;
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	position:relative;
+	background:rgba(0, 0, 0, 0);
+	z-index:1;
+	margin-left: -6px;
+}
+.mega-option input {
+	display:none;
+}
+.mega-option:before {
+	content:" ";
+	display:block;
+	border: solid 1px;
+	border-color: #888 #666 #333 #666;
+	
+	height:105%;
+	width:95%;
+	margin-left: 10px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:rgba(0, 0, 0, 0);
+	-webkit-transition: all 0.2s ease-out;
+	box-shadow: 0 0 0 rgba( 0,0,0,0 );
+	z-index: -1;
+}
+.mega-option.option-selected:before {
+
+	background:white;
+	display:block;
+	border: solid 1px;
+	border-color: #666 #444 #111 #444;
+	position:absolute;
+	top:0px;
+	left:0px;
+	color:black;
+	box-shadow: 1px 1px 1px rgba( 0,0,0,0.6 ), -1px -1px 1px rgba( 0,0,0,0.6 );
+
+}
+.mega-option label {
+	margin-bottom: 10px;
+	font-size:35px;
+}
+
+.mega-option label {
+	margin: 10px;
+}
+.mega-option .all-details {
+	width:100%;
+}
+.mega-option .option-details {
+	margin-bottom: 4px;
+	display:block;
+	width:100%;
+}
+.mega-option button {
+	margin-top: 40px;
+}
+.field-container-header {
+	height:120px;
+}

@@ -1,0 +1,98 @@
+.game-container {
+	
+}
+button {
+	border:solid 1px black !important;
+}
+
+.game-container .large-4 {
+	width: 32%;
+	float:left;
+}
+.panel-button {
+	border:solid 1px black !important;
+}
+.play-types, .ticket {
+	padding-left: 20px;
+}
+.play-types .columns {
+	float:left;
+	width:90px;
+	margin-bottom:15px;
+}
+.final-ticket-row .columns {
+	float:left;
+	width:80px;
+	font-size:9pt;
+}
+.ticket-row  .columns {
+	float:left;
+	width:60px;
+}
+
+.selected-number {
+	border:solid 1px black !important;
+}
+.instructions-body .large-5 {
+	float:left;
+	width:40%;
+}
+.instructions-body .large-7 {
+	float:left;
+	width:60%;
+}
+.instructions-body .small-4 {
+	float:left;
+	width:33%;
+}
+.instructions-button {
+	display:none !important;
+}
+.machine-container {
+	border-right:solid 1px black !important;
+}
+.machine-section {
+	width:300px;
+	height:200px;
+	float:left;
+}
+.ie-ball {
+	height: 50px;
+	width: 50px;
+	position:absolute;
+	top:-60px;
+	left:100px;
+	font-size: 25px;
+	line-height: 50px;
+	background: url(../images/ie-ball.png) no-repeat center center !important;
+	background-size: cover;
+	z-index: 1;
+}
+.draw-results .small-4 {
+	float:left;
+	width:33%;
+
+}
+.play-examples .small-3 {
+	float:left;
+	width:25%;
+}
+
+.play-examples .small-6 {
+	float:left;
+	width:50%;
+}
+.flash-container {
+	height: 150px;
+	z-index:0;
+}
+.remove_line {
+	margin-top: 6px !important;
+	line-height:15px;
+}
+.machine-section {
+	border:solid 1px black !important;
+}
+.play-cell {
+	width:100px;
+}

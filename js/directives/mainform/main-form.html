@@ -1,0 +1,111 @@
+<div class="row step-row main-form-step">
+   <div class="large-12 columns">
+      <h2 class='sign-up'>
+         <span class='step-number step-2'>2</span>
+         <span class='sign-up-text'>Enter Details</span>
+      </h2>
+   </div>
+</div>
+<div class='row'>
+	<div class="large-12 columns main-form-question">
+	    <label>Full Name</label>
+	    <div>
+        	<input type="text" placeholder="Full Name" class='fullname' />	
+        </div>
+	</div>
+</div>
+<div class='row'>
+	<div class="large-12 columns main-form-question">
+	    <label>Address</label>
+	    <div>
+        	<input type="text" placeholder="Address" class='address' />	
+        </div>
+	</div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" exclusive-radio='nzCitizen'>
+      <label>Are you are NZ Resident or Citizen</label>
+      <div class='row radio-row'>
+        <div class='large-2 small-6 columns'>
+          <input type="radio" class='citizen-yes' id='citizen-yes' />
+          <label class='inline-label'>Yes</label>
+        </div>
+        <div class='large-10 small-6 columns'>
+          <input type="radio" class='citizen-no' id='citizen-no' />
+          <label class='inline-label'>No</label>
+        </div>
+      </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" exclusive-radio='terminalIllnesses'>
+      <label>
+        Please confirm you have no terminal illnesses
+        <span>(<a href='#' class='list-link'>List</a>)</span>
+      </label>
+      <div class='row'>
+        <div class='large-2 small-6 columns'>
+            <input type="radio" class='terminal-yes' id='terminal-yes' />
+            <label class='inline-label'>Yes</label>
+        </div>
+        <div class='large-10 small-6 columns'>
+            <input type="radio" class='terminal-no' id='terminal-no' />
+            <label class='inline-label'>No</label>
+        </div>
+      </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" exclusive-radio='restrictedActivities'>
+      <label>
+        Please confirm you do not participate in any restricted activities
+        <span>(<a href='#' class='list-link'>List</a>)</span>
+      </label>
+      <div class='row'>
+        <div class='large-2 small-6 columns'>
+            <input type="radio" class='restricted-yes' id='restricted-yes' />
+            <label class='inline-label'>Yes</label>
+        </div>
+        <div class='large-10 small-6 columns'>
+            <input type="radio" class='restricted-no' id='restricted-no' />
+            <label class='inline-label'>No</label>
+        </div>
+      </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" exclusive-radio='paymentMethod' >
+      <label>Which payment method do you wish to use?</label>
+      <div class='row'>
+        <div class='large-2 small-6 columns'>
+            <input type="radio" class='payment-credit-card' id='credit-card' />
+            <label class='inline-label'>Credit Card</label>
+        </div>
+        <div class='large-10 small-6 columns'>
+            <input type="radio" class='payment-online-banking'  id='online-banking' />
+            <label class='inline-label'>Online Banking</label>
+        </div>
+      </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" style='height:0px;min-height:0px;'>
+      <label>Credit Card Details</label>
+      <div>
+          <input type="text" placeholder="0000 0000 0000 0000" class='credit-card-details' /> 
+        </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="large-12 columns main-form-question" style='height:0px;min-height:0px;'>
+      <label>Online Banking details</label>
+      <div>
+          <input type="text" placeholder="00 0000 0000000 000" class='bank-account-details' /> 
+        </div>
+  </div>
+</div>
+<div class="row bottom-row">
+    <div class="large-3 columns large-offset-9 submit-container" >
+       <button class='submit'>Submit</button>
+    </div>
+ </div>

@@ -1,0 +1,46 @@
+<div class="row step-row">
+   <div class="large-12 columns">
+      <h2 class='sign-up'>
+         <span class='step-number'>1</span>
+         <span class='sign-up-text'>Choose a plan</span>
+      </h2>
+   </div>
+</div>
+
+<div class='basic-input-area'>
+   <div class="row basic-questions">
+      <div class="large-4 columns date-of-birth">
+         <label class='' input-label>Date of birth</label>
+         <date id='dateOfBirth'></date>
+      </div>
+      <div class="large-4 columns income">
+         <label input-label>Income</label>
+         <div>
+            <input type="number" placeholder="example: 60000" class='income' />
+         </div>
+      </div>
+      <div class="large-4 columns occupation">
+         <label input-label>Occupation</label>
+         <div>
+            <input type="text" placeholder="example: Builder" class='occupation' />
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="large-12 columns">
+         <h2 class='options'>Premium Options</h2>
+      </div>
+   </div>
+   <div class="row">
+      <div class="large-3 columns" ng-repeat='option in options'>
+         <div optionbox='true' data='option'></div>
+      </div>
+   </div>
+
+   <div class="row bottom-row">
+      <div class="large-3 columns large-offset-9 submit-container" >
+         <button disabled='true' class='submit'>Submit</button>
+      </div>
+   </div>
+</div>
