@@ -91,7 +91,7 @@ html, body {
 	font-weight: normal;
 }
 .occupation, .income, .date-of-birth, .date-field {
-	height:90px;
+	
 }
 .occupation input, .income input {
 	margin-top:13px;
@@ -191,7 +191,7 @@ mainform {
 	font-weight:300;
 }
 .field-container, .field-container-no-border {
-	min-height:90px !important;
+	min-height:110px !important;
 }
 .form-group {
 	margin:20px 5px 0px;
@@ -333,4 +333,24 @@ input:focus:before {
 }
 .field-container-header {
 	height:120px;
+}
+.validation-message {
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	position:absolute;
+	bottom:13px;
+	left:20px;
+	font-size:16px;
+	font-weight: 400;
+	color:red;
+	height:18px;
+}
+.error .validation-message {
+	opacity: 1;
+}
+.field-container.error label {
+	color:#000;
+}
+.error input[type='text'] {
+	border:solid 1px red;
 }

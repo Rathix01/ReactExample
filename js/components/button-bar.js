@@ -2,21 +2,18 @@
 
 Components.register( "ButtonBar", React.createClass({
 
-  setFormData: function( newState ) {
-    this.setState({ pageData: newState });
-  },
-
   setButtonData: function( newState ) {
-    this.setState(newState);
+    console.log( this.state, this.isMounted() )
+    if( this.isMounted() ) this.setState( newState );
+    else return Bacon.noMore;
   },
 
   getInitialState: function() { 
-    return { forwardIsEnabled: false, backwardIsEnabled: false, saveIsEnabled: false, pageData: [] }; 
+    return { forwardIsEnabled: true, backwardIsEnabled: false, saveIsEnabled: false }; 
   },
   
-  componentWillMount: function() {
-    this.props.formStream.onValue(this.setFormData);
-    this.props.buttonStream.onValue(this.setButtonData);
+  componentDidMount: function() {
+    this.props.buttonStream.delay(10).onValue( this.setButtonData );
   },
 
   handleForwardClick: function( e ) {
@@ -30,6 +27,7 @@ Components.register( "ButtonBar", React.createClass({
   // Render Time
 
   render: function() {
+
     return <div className='button-bar row'>
               <div className='large-12 small-12 buttons'>
                 <button onClick={ this.handleBackwardClick } disabled={ !this.state.backwardIsEnabled }> Back </button>

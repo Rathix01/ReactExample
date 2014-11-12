@@ -1,104 +1,114 @@
 var FormStore = ( function () {
 
-	var formStepIndex = 0;
-	var pages = [ dummyData.page1, dummyData.page2, dummyData.page3, dummyData.page4 ];
-	var formStream = new Bacon.Bus;
-	var buttonStream = new Bacon.Bus
-	var completedPage = null;
-	var maxIndex = 0;
-
-	var updateButtons = function() {
-		FormStore.buttonStream.push( { forwardIsEnabled: formStepIndex < maxIndex } )
-	}
-
-	var nonNegativeIndex= function( index ) {
-		var i = index < 0 ? 0 : index;
-		return i;
-	}
-
-	var stepBack = function() {
-
-		if( ramda.is( Array, pages[ formStepIndex - 1 ] ) ) {
-			formStepIndex -= 1;
-			return pages[ nonNegativeIndex( formStepIndex ) ];
-		} else {
-			formStepIndex -= 1;	
-			return stepBack()
-		}
-	}
-
-	var getUpdateData = function ( direction ) {
+	var updatePageNumber = function( existingPageNumber, direction ) {
 		return direction === "forward"
-			     ? pages[ formStepIndex ]
-			     : stepBack( [] )
+			     ? ( existingPageNumber + 1 )
+			     : ( existingPageNumber - 1 );
 	}
 
-	var updateForm = function( direction ) {
-		FormStore.formDataStream.push( getUpdateData( direction ) );
+	var forwardIsEnabled = function( pageData ) {
+		return pageData.number < pages.length && pageData.number < pageData.max;
 	}
 
+	var backwardIsEnabled = function( pageData ) {
+		return pageData.number > 0;
+	}
 
-	var forwardStep = function() {
-		if( (pages.length - 1) > formStepIndex ) {
-			formStepIndex += 1;
-			maxIndex = maxIndex > formStepIndex ? maxIndex : formStepIndex;
-			updateButtons();
-			updateForm('forward');			
+	var updateButtons = function( pageData ) {
+		buttonStream.push( { 
+		  forwardIsEnabled: forwardIsEnabled( pageData ),
+		  backwardIsEnabled: backwardIsEnabled( pageData )			
+		} );
+	}
+
+	var getMaxNumber = function( exisiting, pageNumber ) {
+		return ( exisiting.max >= pageNumber )
+			? exisiting.max
+			: pageNumber
+	}
+
+	getPageMaximum = function( existing, pageNumber ) {
+		return { number: pageNumber, max: getMaxNumber( existing, pageNumber ) }
+	}
+
+	var updateFormPage = function( pageNumber ) {
+		formStream.push( pages[ pageNumber ] );
+	}
+
+	var handleValidPages = function( validPage ) {
+		if( validPage.isValid ) {
+			console.log( 'page-complete', validPage.template )
+			FormStore.buttonStream.push( { forwardIsEnabled: true } );
 		}
 	}
 
-	var backwardStep = function() {
-		if( formStepIndex > 0 ) {
-			updateButtons();
-			updateForm('backward');	
-		}
+	var fieldIsEmpty = function ( template, key ) {
+		var field = ramda.prop( key, template );
+		return !ramda.is( Object, field ) || field.data === true; // need to also check for bacon errors.
 	}
 
-	var formAction = function(payload) {
-
-	  if (payload.actionType === 'page-complete') {
-
-	    completedPage = payload
-	    FormStore.buttonStream.push( { forwardIsEnabled: true });
-	    FormValueStore.setValueStream.push( payload.template )
+	var pageValidAndComplete = function( template ) {
+	  return {
+	    template: template,
+		isValid: ( ramda.filter( fieldIsEmpty.bind( this, template ), ramda.keys( template ) ).length === 0 )
 	  }
+	}
 
+	var pageAction = function(payload) { 
+      if (payload.actionType === 'page-change') {
+	    pageChangeStream.push( payload.template )
+	  }
+	}
+
+	var buttonAction = function(payload) {
 	  if( payload.actionType === 'left-button-click' ) {
-	  	backwardStep();
-	  	var forwardEnabled = formStepIndex < maxIndex;
-	  	FormStore.buttonStream.push( { backwardIsEnabled: formStepIndex !== 0, forwardIsEnabled: forwardEnabled, } );
+	  	internalButtonStream.push('backward')
 	  }
-
 	  if( payload.actionType === 'right-button-click' ) {
-		forwardStep();
-
-		var forwardEnabled = formStepIndex < maxIndex;
-		FormStore.buttonStream.push( { forwardIsEnabled: forwardEnabled,  backwardIsEnabled: true });
+	  	internalButtonStream.push('forward')
 	  }
+	}
 
-	//   if( payload.actionType === 'form-field-change' ) {
-			// check for field type.
-	//   }
-	 }
+	// dummyData in an array, a bunch of buses to other parts of the application.
+	var pages = [ dummyData.page1, dummyData.page2, dummyData.page3, dummyData.page4 ];
+	
+	// push out.
+	var formStream = new Bacon.Bus;
+	var updateStream = new Bacon.Bus;
+	var buttonStream = new Bacon.Bus;
 
-	dispatchToStream.register( formAction );
+	//internal
+	var pageChangeStream = new Bacon.Bus;
+	var internalButtonStream = new Bacon.Bus;
+
+	// dispatcher tokens. These can be taken 
+	var buttondispatchToken = formDispatcher.register( buttonAction );
+	var pagedispatchToken =   formDispatcher.register( pageAction );
+
+	// update the page number.
+	var pageNumberStream = internalButtonStream.scan( 0, updatePageNumber )
+	  
+	// on page number update, update the page
+	pageNumberStream.onValue( updateFormPage )
+	
+	// on page number update get the maximum number of complete pages.
+	// use this data to set the button state correctly.
+	pageNumberStream.scan( {}, getPageMaximum )
+	  .onValue( updateButtons )
+
+	// validate pages. If a page is valid
+	// do stuff...
+	// currently used to log complete+valid pages.
+	pageChangeStream
+	  .map( pageValidAndComplete )
+	  .onValue( handleValidPages )
 
 	return {
 		formDataStream: formStream,
-		buttonStream: buttonStream
-	}
-
-} () )
-
-
-var FormValueStore = ( function () {
-
-	var setValueStream = new Bacon.Bus();
-	var getValueStream = setValueStream.toProperty();
-
-	return {
-		setValueStream: setValueStream,
-		getValueStream: getValueStream
+		buttonStream: buttonStream,
+		updateStream: updateStream,
+		buttondispatchToken: buttondispatchToken,
+		buttondispatchToken: buttondispatchToken
 	}
 
 } () )

@@ -4,44 +4,66 @@ var dummyDataPayment = [{ text:"Credit Card", value: "CreditCard" }, { text:"Onl
 var dummyDataDoctors = [{ text:"Doctor 1", value: "Doctor1" }, { text:"Doctor 2", value: "Doctor2" }, { text:"Doctor 3", value: "Doctor3" }]
 
   var dummyData = {
-    page1: [
-      {
-        type: "page",
-        name: "page 1",
-        step: 1,
-        key: generateUUID(),
-        childElements: [
-          {
+  page1:
+    {
+      type: "page",
+      name: "page 1",
+      step: 1,
+      childElements: [
+        {
+          type: "group",
+          columns: '1',
+          childElements: [
+             { id: "Header", text: "Lets Get Started", subheader:"Enter the following details", type: "Header",  complete: false, required: true }, 
+          ]
+        },
+        {
             type: "group",
-            columns: '1',
+            columns: '2',
             key: generateUUID(),
             childElements: [
-               { id: "Header", text: "Lets Get Started", subheader:"Enter the following details", type: "Header",  complete: false, key: generateUUID(), required: true }, 
+               { id: "FirstName", text: "First Name", type: "TextField",  complete: false, key: generateUUID(), required: true },
+               { id: "FamilyName", text: "Family Name", type: "TextField",  complete: false, key: generateUUID(), required: true },
             ]
           }, 
-          {
-            type: "group",
-            columns: '3',
-            key: generateUUID(),
-            childElements: [
-               { id: "DateOfBirth", text: "Date of Birth", type: "DateField", key: generateUUID(), required: true }, 
-               { id: "Income",      text: "Income",        type: "TextField", key: generateUUID(), required: true },
-               { id: "Occupation",  text: "Occupation",    type: "TextField", key: generateUUID(), required: true }
-            ]
-          },
-          {
-            type: "group",
-            columns: '1',
-            key: generateUUID(),
-            childElements: [
-               { id: "PlanOption", text: "Select a Premium",  type: "HeroOptionField", key: generateUUID(), options: dummyDataPlanOptions },
-            ]
-          }
-        ]
-      }
-    ],
+        {
+          type: "group",
+          columns: '3',
+          key: generateUUID(),
+          childElements: [
+             { id: "DateOfBirth", text: "Date of Birth", type: "DateField",  required: true }, 
+             { id: "Income",      text: "Income",        type: "NumberField",  required: true },
+             { id: "Occupation",  text: "Occupation",    type: "SelectField",  required: true, options: dummyDataYesNo }
+          ]
+        },
+        // {
+        //   type: "group",
+        //   columns: '1',
+        //   key: generateUUID(),
+        //   childElements: [
+        //      { id: "NZCitizen1", text: "Are you a NZ citizen or resident?", type: "RadioOptionField",  complete: false, key: generateUUID(), required: true, options: dummyDataYesNo },
+        //   ]
+        // },
+        // {
+        //   type: "group",
+        //   columns: '1',
+        //   key: generateUUID(),
+        //   childElements: [
+        //      { id: "PlanOption", text: "Select a Premium",  type: "HeroOptionField", options: dummyDataPlanOptions },
+        //   ]
+        // },
+        // {
+        //   type: "group",
+        //   columns: '1',
+        //   key: generateUUID(),
+        //   childElements: [
+        //      { id: "PaymentTypeXYZ", text: "Payment Type", type: "AltValuesField", complete: false, required: true, options: dummyDataPayment }
+        //   ]
+        // },
+      ]
+    },
 
-    page2: [
+    page2:
       {
         type: "page",
         name: "page 2",
@@ -106,10 +128,9 @@ var dummyDataDoctors = [{ text:"Doctor 1", value: "Doctor1" }, { text:"Doctor 2"
           },
 
         ]
-      }
-    ],
+      },
 
-    page3: [
+    page3:
       {
         type: "page",
         name: "page 3",
@@ -157,10 +178,9 @@ var dummyDataDoctors = [{ text:"Doctor 1", value: "Doctor1" }, { text:"Doctor 2"
             ]
           }
         ]
-      }
-    ],
+      },
 
-    page4: [
+    page4:
       {
         type: "page",
         name: "page 4",
@@ -193,5 +213,4 @@ var dummyDataDoctors = [{ text:"Doctor 1", value: "Doctor1" }, { text:"Doctor 2"
           }
         ]
       }
-    ]
   }

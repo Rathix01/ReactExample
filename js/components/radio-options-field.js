@@ -4,22 +4,25 @@ Components.register("RadioOptionField", React.createClass({
     
     mixins: [ fieldBase ],
 
+    getValue: function() {
+      return { value: this.state.value }
+    },
+
     isChecked: function( optionData ) {
       return optionData.value === this.state.checked
     },
 
     getOptionWidth: function() {
-
       var width = ( Math.round( 100 / this.props.options.length ) - 1 );
       return { 'width': + width + "%" }; 
     },
 
-    componentDidMount: function() {
-      this.setState( { checked: this.state.value } )
+    validateField: function( state ) {
+      return state;
     },
 
     toggleOption: function( e ) {
-      this.setState( { checked: e.target.dataset.value }, function () { this.state.valueStream.push( this.state.checked ) } )
+      this.setState( { checked: e.target.dataset.value }, function () { this.state.valueStream.push( { value: this.state.checked } ) } )
     },
 
     createOption: function ( optionData ) {
@@ -30,12 +33,23 @@ Components.register("RadioOptionField", React.createClass({
               </div>
     },
 
+    applyUpdatedState: function( update ) {
+
+      if( !update.state.data ) return;
+
+      this.setState( { 
+        value:   update.state.data.value,
+        checked: update.state.data.value
+      } );
+
+    },
 
     createInput: function() {
       return <div className='radio-options-field' value={ this.state.value }>
-              {  this.props.options.map( this.createOption ) }   
-             </div>
+              { this.props.options.map( this.createOption ) }
+             </div> 
     }
+
   })
 
 );
@@ -88,6 +102,17 @@ Components.register("HeroOptionField", React.createClass({
                 </div>
                 <button onClick={ this.toggleOption } data-value={ optionData.value } className='button radius select-button'> Select </button>
               </div>
+    },
+
+    applyUpdatedState: function( update ) {
+
+      if( !update.state.data ) return;
+
+      this.setState( { 
+        value:   update.state.data.value,
+        checked: update.state.data.value
+      } );
+
     },
 
     createInput: function() {
