@@ -14,9 +14,8 @@ var GeneratedFormActions = (function() {
 	// publishRegistrationEvent
 	// publishes to the rest of the application the fact that this form field has been registered.
 
-	var publishRegistrationEvent = function( field ) {
-		formDispatcher.dispatch( { actionType: 'form-field-register', field: field } );
-		return field;
+	var publishRegistrationEvent = function( state ) {
+		formDispatcher.dispatch( { actionType: 'form-field-register', state: state } );
 	}
 
 	// setUpValueStreamListener
@@ -25,16 +24,15 @@ var GeneratedFormActions = (function() {
 	// the field.valueStream will recieve data when the registering component's state changes.
 
 	var setUpValueStreamListener = function( field ) {
-		field.valueStream.onValue( publishFieldChangeEvent.bind( this, field.id ) );
-		return field;
+		field.valueStream.onValue( publishFieldChangeEvent );
 	}
 
 	// publishFieldChangeEvent
 	// dispatches to the rest of the application the form-field-change event.
 	// the state we dispatch is the state for the form component that pushed to the valuestream ( see above function ).
 
-	var publishFieldChangeEvent = function( fieldId, value ) {
-		formDispatcher.dispatch( { actionType: 'form-field-change', field: { id: fieldId, data: value } } );
+	var publishFieldChangeEvent = function( state ) {
+		formDispatcher.dispatch( { actionType: 'form-field-change', state: state } );
 	}
 
 	// createTemplateField
@@ -45,9 +43,9 @@ var GeneratedFormActions = (function() {
 	// Here we create and object that looks like this: { FieldName: Bacon.Property  }
 	// each baconProperty can broadcast the state that is posted to the valueStream.
 
-	var createTemplateField = function( field ) {
-	    var newField = {}
-		newField[ field.id ] = field.valueStream.toProperty( null );
+	var createTemplateField = function( state ) {
+	    var newField = {};
+		newField[ state.id ] = state.valueStream.toProperty( null );
 		return newField;
 	}
 

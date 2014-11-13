@@ -5,14 +5,10 @@ Components.register( "SelectField", React.createClass({
     mixins: [ fieldBase ],
 
     handleChange:function( e ) {
-      this.setState( { value: e.target.value }, this.publishValidChanges );
+      this.setState( { value: e.target.value }, this.processChange );
     },
 
-    getValue: function() {
-      return { value: this.state.value };
-    },
-
-    validateField: function( state ) {
+    validate: function( state ) {
       return state;
     },
 
@@ -22,13 +18,6 @@ Components.register( "SelectField", React.createClass({
 
     getOptionTag: function( option ) {
       return <option value={ option.value } selected={ this.isOptionSelected( option ) }>{ option.text }</option>
-    },
-
-    applyUpdatedState: function( update ) {
-      if( !update.state.data ) return;
-      this.setState( { 
-         value: update.state.data.value
-      } )
     },
 
     createInput: function() {

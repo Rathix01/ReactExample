@@ -1,68 +1,38 @@
 var FormStateStore = ( function () {
 
 	var initialState = { fields: {}, payload: {} }
-	var setStream = new Bacon.Bus();
+	var internalStateStream = new Bacon.Bus();
 
+	// setData
+	// keeps a state object that holds all the state for all
+	// the form fields that have produced state.
 
 	var setData = function( state, payload ) {
-
-		var id = payload.field.id;
-		var currentField = state.fields[ id ];
-
-		if( payload.actionType === 'form-field-register' && !ramda.is( Object, currentField ) ) {
-			state.fields[ id ] = true;
-		} else if ( payload.actionType === 'form-field-change' ) {
-			state.fields[ id ] = payload.field;
-		}
-
+		state.fields[ payload.state.id ] = payload.state;
 		state.payload = payload;
 		return state;
 	}
 
-	var sendFieldState = function ( id, state ) {
-		FormStore.updateStream.push( { 
-          target: id, 
-		  state: state, 
-		  actionType: 'set-state' 
-		} );
-	}
-
-	setStream.scan( initialState, setData ).onValue( function ( state ) {
-
-		
-
-		var allFields = state.fields;
-		var data = state.payload.field
-
-
-		if( state.payload.actionType === 'form-field-register' ) {
-
-			//there is a bug causing the 'data' field to nest itself.
-			if ( allFields[ data.id ].data && allFields[ data.id ].data.data ) allFields[ data.id ].data = allFields[ data.id ].data.data;
-			sendFieldState( data.id, allFields[ data.id ] )
-		}
-
-		if( state.payload.actionType === 'form-field-change' ) {
-			// todo, publish updates that are the result of business rules.
-		}
-	})
+	// formAction
+	// this is the function we will register with the dispacther.
+	// we are interested in form-field-change events.
 
 	var formAction = function(payload) {
-
-	  if( payload.actionType === 'form-field-register' ) {
-	  	setStream.push( payload )
-	  }
-
 	  if( payload.actionType === 'form-field-change' ) {
-		setStream.push( payload )
+	  	internalStateStream.push( payload )
 	  }
-
 	}
 
+	// for dispatcher waitFor calls.
 	var dispatchToken = formDispatcher.register( formAction );
 
+	// when state is pushed in, add it to the state object kept by the scan function.
+	// this causes stateStream to be a Bacon.Property
+
+	var stateStream = internalStateStream.scan( initialState, setData );
+
 	return {
-		setStream: setStream,
+		stateStream: stateStream,
 		dispatchToken: dispatchToken
 	}
 

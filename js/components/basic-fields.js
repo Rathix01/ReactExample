@@ -40,17 +40,9 @@ Components.register("UploadField", React.createClass({
       return { value: this.props.value }; 
     },
 
-    getValue: function() {
-      return this.state.value;
-    },
-
-    validateField: function( state ) {
+    validate: function( state ) {
       return state;
     }, 
-
-    applyChange: function() {
-      this.publishChanges( this.getValue() )
-    },
 
     handleChange:function( e ) {
       this.setState( { value: e.target.value }, this.applyChange );

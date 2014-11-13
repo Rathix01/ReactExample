@@ -37,7 +37,7 @@ var FormStore = ( function () {
 
 	var handleValidPages = function( validPage ) {
 		if( validPage.isValid ) {
-			console.log( 'page-complete', validPage.template )
+			//console.log( 'page-complete', validPage.template )
 			FormStore.buttonStream.push( { forwardIsEnabled: true } );
 		}
 	}

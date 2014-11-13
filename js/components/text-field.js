@@ -8,27 +8,14 @@ Components.register("TextField", React.createClass({
       return { value: this.props.value }; 
     },
 
-    validateField: function( state ) {
-      return ( state.value === "" && this.props.required )
-        ? new Bacon.Error( "A value is required" )
-        : state;
-    },
-
-    getValue: function() {
-      return { value: this.state.value };
+    validate: function() {
+      return ( this.state.value === "" && this.props.required )
+        ? { value: this.state.value, error: "A value is required" }
+        : { value: this.state.value, error: "" };
     },
 
     handleChange:function( e ) {
-      this.setState( { value: e.target.value }, this.publishValidChanges );
-    },
-
-    applyUpdatedState: function( update ) {
-
-      if( !update.state.data ) return;
-
-      this.setState( { 
-        value:   update.state.data.value
-      } )
+      this.setState( { value: e.target.value }, this.processChange )
     },
 
     createInput: function() {
@@ -38,8 +25,3 @@ Components.register("TextField", React.createClass({
     }
   })
 );
-
-
-
-
-

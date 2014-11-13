@@ -3,13 +3,13 @@
 Components.register( "ButtonBar", React.createClass({
 
   setButtonData: function( newState ) {
-    console.log( this.state, this.isMounted() )
+    //console.log( this.state, this.isMounted() )
     if( this.isMounted() ) this.setState( newState );
     else return Bacon.noMore;
   },
 
   getInitialState: function() { 
-    return { forwardIsEnabled: true, backwardIsEnabled: false, saveIsEnabled: false }; 
+    return { forwardIsEnabled: false, backwardIsEnabled: false, saveIsEnabled: false }; 
   },
   
   componentDidMount: function() {

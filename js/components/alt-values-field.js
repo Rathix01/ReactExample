@@ -38,16 +38,7 @@ Components.register("AltValuesField", React.createClass({
     },
     
     handleChange:function( e ) {
-      this.setState( { value: e.target.value }, this.publishValidChanges );
-    },
-
-    applyUpdatedState: function( update ) {
-
-      if( !update.state.data ) return;
-      this.setState( { 
-        checked:   update.state.data.checked,
-        value:   update.state.data.value,
-      } );
+      this.setState( { value: e.target.value }, this.processChange );
     },
 
     createOption: function ( optionData ) {
